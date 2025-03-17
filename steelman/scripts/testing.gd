@@ -11,6 +11,7 @@ enum alig {ALLY=1, NEUTRAL=11, ENEMY=111}
 
 signal lvl_up
 
+
 var chast:= Equipment.new()
 var legs:= Equipment.new()
 
@@ -20,6 +21,7 @@ class Equipment:
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	print("da")
 	#$Label3D.text="Test za boje da DA BICE LEPO DAA"
 	#$Label3D.modulate=Color.GREEN
@@ -106,3 +108,4 @@ func add(num1,num2):
 
 func _on_lvl_up() -> void:
 	print("signaaaaaaaaaal radi")
+	
