@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0gb31qase0mr"]
+
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_tnyhu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s7oph"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6ydy"]
+albedo_color = Color(0.384314, 0.0862745, 0.811765, 0.988235)
+metallic = 0.89
+roughness = 0.55
+clearcoat_enabled = true
+grow_amount = 0.18
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bidce"]
+radius = 1.7325
+
+[node name="TestGuy" type="CSGMesh3D"]
+transform = Transform3D(0.765392, 0, 0, 0, 0.751114, 0, 0, 0, 0.521934, 0, 0.765815, 0)
+use_collision = true
+mesh = SubResource("CapsuleMesh_s7oph")
+material = SubResource("StandardMaterial3D_r6ydy")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2.29653, 0, 0, 0, 2.51483, 0, 0, 0, 2.23635, 0, 0, 0)
+script = ExtResource("1_tnyhu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.913133, 0, 0, 0, 1.47824, 0, 0, 0, 1.35489, 0, 0, 0)
+shape = SubResource("SphereShape3D_bidce")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

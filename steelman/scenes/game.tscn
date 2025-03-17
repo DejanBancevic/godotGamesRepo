@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://cj63i8qycqnm3"]
+
+[ext_resource type="Script" path="res://scripts/testing.gd" id="1_vr0pa"]
+[ext_resource type="PackedScene" uid="uid://21t8dt8gn66" path="res://scenes/industrial_horror_ps_like.tscn" id="2_dk2ei"]
+[ext_resource type="PackedScene" uid="uid://c0gb31qase0mr" path="res://models/block.tscn" id="3_7jq6i"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://assets/proto_controller/proto_controller.tscn" id="3_wyrab"]
+[ext_resource type="PackedScene" uid="uid://b0ccdubsobu8f" path="res://scenes/test.tscn" id="4_gw3pc"]
+[ext_resource type="PackedScene" uid="uid://c3w61o0hlbup8" path="res://assets/Base Humanoid Mesh/Base Humanoid Mesh/Humanoid.fbx" id="5_im2iu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tltqe"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wagq2"]
+sky_material = SubResource("ProceduralSkyMaterial_tltqe")
+
+[sub_resource type="Environment" id="Environment_w3jbc"]
+background_mode = 2
+sky = SubResource("Sky_wagq2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_5n4mu"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_vr0pa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w3jbc")
+
+[node name="World Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.975029, 0, 0.222076, 0, 1, 0, -0.222076, 0, -0.975029, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World Ground"]
+shape = SubResource("WorldBoundaryShape3D_5n4mu")
+
+[node name="IndustrialHorror_PS_like" parent="." instance=ExtResource("2_dk2ei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99627, -0.968774, 2.99565)
+
+[node name="ProtoController" parent="." instance=ExtResource("3_wyrab")]
+transform = Transform3D(-0.143717, 0, -0.989619, 0, 1, 0, 0.989619, 0, -0.143717, -1.19396, 0, -1.77134)
+input_left = "move_left"
+input_right = "move_right"
+input_forward = "move_up"
+input_back = "move_down"
+input_jump = "jump"
+input_sprint = "ssprint"
+input_freefly = "ffreefly"
+
+[node name="Bullshit" type="Node" parent="."]
+
+[node name="test" type="CSGBox3D" parent="Bullshit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.38788, 0.993713, 0)
+use_collision = true
+size = Vector3(1, 2.98743, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bullshit/test"]
+operation = 2
+size = Vector3(1, 1, 0.544678)
+
+[node name="Node3D" parent="Bullshit" instance=ExtResource("4_gw3pc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21641, 1.5037, -4.64065)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Bullshit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9607, 0.998655, 0)
+light_color = Color(0.0627451, 1, 1, 1)
+
+[node name="Humanoid" parent="Bullshit" instance=ExtResource("5_im2iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.751913, 0.209269, 2.0122)
+skeleton = NodePath("../..")
+
+[node name="tekst" type="Label3D" parent="."]
+transform = Transform3D(-0.0235344, 0, -0.946088, 0, 1.29082, 0, 1.30145, 0, -0.0171085, 3.09296, 1.11022, -8.22183)
+visible = false
+text = "ssdadsadasdad"
+
+[node name="TestGuy" parent="." instance=ExtResource("3_7jq6i")]
+transform = Transform3D(0.765392, 0, 0, 0, 0.751114, 0, 0, 0, 0.521934, 3.86207, 0.761804, -8.38342)
+
+[connection signal="lvl_up" from="." to="." method="_on_lvl_up"]

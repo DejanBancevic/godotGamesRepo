@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://21t8dt8gn66"]
+
+[ext_resource type="PackedScene" uid="uid://yxkwxjhdpvwp" path="res://assets/Industrial_exterior_v2/Models/IndustrialHorror_PS_like.fbx" id="1_ir3x1"]
+
+[node name="IndustrialHorror_PS_like" instance=ExtResource("1_ir3x1")]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://biiv42r5l1ya2"]
+
+[ext_resource type="PackedScene" uid="uid://c3w61o0hlbup8" path="res://assets/Base Humanoid Mesh/Base Humanoid Mesh/Humanoid.fbx" id="1_en526"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7h625"]
+height = 1.60296
+
+[node name="Player" instance=ExtResource("1_en526")]
+
+[node name="HumanoidBase_Overlapping" parent="." index="1"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.872589, 0)
+shape = SubResource("CylinderShape3D_7h625")
