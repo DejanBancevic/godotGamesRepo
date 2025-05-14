@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8s0jcnmtkyh8"]
+
+[ext_resource type="Script" path="res://scripts/helmet.gd" id="1_s2w22"]
+[ext_resource type="Animation" uid="uid://cffgrdq7dm3jh" path="res://animations/float.res" id="2_ulilr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_js340"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_411on"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqffq"]
+albedo_color = Color(0.92549, 0, 0.027451, 1)
+albedo_texture = SubResource("ImageTexture_411on")
+
+[sub_resource type="SphereMesh" id="SphereMesh_aacty"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfktq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l0m2e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhrcq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g81py"]
+material = SubResource("StandardMaterial3D_yhrcq")
+is_hemisphere = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4q76"]
+albedo_texture_force_srgb = true
+albedo_texture_msdf = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_28w1b"]
+radius = 1.11629
+
+[sub_resource type="Animation" id="Animation_py44s"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.2, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vufc2"]
+_data = {
+"RESET": SubResource("Animation_py44s"),
+"float": ExtResource("2_ulilr")
+}
+
+[node name="Helmet" type="Node3D"]
+transform = Transform3D(0.993056, 0, 0.117641, 0, 1, 0, -0.117641, 0, 0.993056, 0, 0, 0)
+
+[node name="Body" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("SphereMesh_js340")
+material = SubResource("StandardMaterial3D_nqffq")
+
+[node name="Headhole" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(1.10916, 0, 0, 0, 0.863401, 0, 0, 0, 1, 0, -0.109299, 0.0101892)
+operation = 2
+mesh = SubResource("SphereMesh_aacty")
+
+[node name="Rim" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(0.272405, 0, 0, 0, 1.46249, 0, 0, 0, 0.142726, 0.00794813, -0.00965064, -0.497614)
+mesh = SubResource("PlaneMesh_sfktq")
+
+[node name="back1" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(0.301581, 0, 0, 0, 0.0150255, 0, 0, 0, 0.041564, 0.00521325, -0.09306, 0.535046)
+mesh = SubResource("CylinderMesh_l0m2e")
+
+[node name="back2" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(0.0281387, 0, 0, 0, 0.0613904, 0.0124145, 0, -0.0380681, 0.0200202, 0.139081, -0.0287764, 0.498796)
+mesh = SubResource("CylinderMesh_l0m2e")
+
+[node name="back3" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(0.0281387, 0, 0, 0, 0.0613904, 0.0124145, 0, -0.0380681, 0.0200202, -0.126428, -0.0287764, 0.498796)
+mesh = SubResource("CylinderMesh_l0m2e")
+
+[node name="top" type="CSGMesh3D" parent="Body"]
+transform = Transform3D(-0.191288, 0, 0, 0, 0.492879, -6.464e-08, 0, 4.30888e-08, 0.739396, 3.89814e-05, 0.079152, -4.52995e-06)
+top_level = true
+flip_faces = true
+mesh = SubResource("SphereMesh_g81py")
+material = SubResource("StandardMaterial3D_y4q76")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_s2w22")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_28w1b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vufc2")
+}
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="helmet_pickup" from="Area3D" to="Area3D" method="_on_helmet_pickup"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cj63i8qycqnm3"]
+[gd_scene load_steps=13 format=3 uid="uid://cj63i8qycqnm3"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1prs7"]
 [ext_resource type="PackedScene" uid="uid://21t8dt8gn66" path="res://scenes/industrial_horror_ps_like.tscn" id="2_dk2ei"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b0ccdubsobu8f" path="res://scenes/test.tscn" id="4_gw3pc"]
 [ext_resource type="PackedScene" uid="uid://c3w61o0hlbup8" path="res://assets/Base Humanoid Mesh/Base Humanoid Mesh/Humanoid.fbx" id="5_im2iu"]
 [ext_resource type="Script" path="res://scripts/tekst.gd" id="6_qovvj"]
+[ext_resource type="PackedScene" uid="uid://c8s0jcnmtkyh8" path="res://models/Helmet.tscn" id="8_atwh4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tltqe"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -64,7 +65,7 @@ operation = 2
 size = Vector3(1, 1, 0.544678)
 
 [node name="Node3D" parent="Bullshit" instance=ExtResource("4_gw3pc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21641, 1.5037, -4.64065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21641, 1.5037, -4.16253)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Bullshit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9607, 0.998655, 0)
@@ -77,10 +78,14 @@ skeleton = NodePath("../..")
 [node name="tekst" type="Label3D" parent="."]
 transform = Transform3D(-0.0235344, 0, -0.946088, 0, 1.29082, 0, 1.30145, 0, -0.0171085, 3.09296, 1.11022, -8.22183)
 visible = false
+billboard = 2
 text = "Oh, hi buddy!"
 script = ExtResource("6_qovvj")
 
 [node name="TestGuy" parent="." instance=ExtResource("3_7jq6i")]
 transform = Transform3D(0.765392, 0, 0, 0, 0.751114, 0, 0, 0, 0.521934, 3.86207, 0.761804, -8.38342)
+
+[node name="Helmet" parent="." instance=ExtResource("8_atwh4")]
+transform = Transform3D(0.993056, 0, 0.117641, 0, 1, 0, -0.117641, 0, 0.993056, 4, 0.886113, -6.17893)
 
 [connection signal="visibility_changed" from="tekst" to="tekst" method="_on_visibility_changed"]
