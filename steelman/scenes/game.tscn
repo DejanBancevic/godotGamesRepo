@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://cj63i8qycqnm3"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1prs7"]
-[ext_resource type="PackedScene" uid="uid://21t8dt8gn66" path="res://scenes/industrial_horror_ps_like.tscn" id="2_dk2ei"]
 [ext_resource type="PackedScene" uid="uid://c0gb31qase0mr" path="res://models/TestGuy.tscn" id="3_7jq6i"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://assets/proto_controller/proto_controller.tscn" id="3_wyrab"]
 [ext_resource type="PackedScene" uid="uid://b0ccdubsobu8f" path="res://scenes/test.tscn" id="4_gw3pc"]
 [ext_resource type="PackedScene" uid="uid://c3w61o0hlbup8" path="res://assets/Base Humanoid Mesh/Base Humanoid Mesh/Humanoid.fbx" id="5_im2iu"]
 [ext_resource type="Script" path="res://scripts/tekst.gd" id="6_qovvj"]
+[ext_resource type="PackedScene" uid="uid://cqt8t2u21yh3m" path="res://scenes/level_0.tscn" id="8_77xcm"]
 [ext_resource type="PackedScene" uid="uid://c8s0jcnmtkyh8" path="res://models/Helmet.tscn" id="8_atwh4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tltqe"]
@@ -39,9 +39,6 @@ transform = Transform3D(-0.975029, 0, 0.222076, 0, 1, 0, -0.222076, 0, -0.975029
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World Ground"]
 shape = SubResource("WorldBoundaryShape3D_5n4mu")
-
-[node name="IndustrialHorror_PS_like" parent="." instance=ExtResource("2_dk2ei")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99627, -0.968774, 2.99565)
 
 [node name="ProtoController" parent="." instance=ExtResource("3_wyrab")]
 transform = Transform3D(-0.143717, 0, -0.989619, 0, 1, 0, 0.989619, 0, -0.143717, -1.19396, 0, -1.77134)
@@ -87,5 +84,8 @@ transform = Transform3D(0.765392, 0, 0, 0, 0.751114, 0, 0, 0, 0.521934, 3.86207,
 
 [node name="Helmet" parent="." instance=ExtResource("8_atwh4")]
 transform = Transform3D(0.993056, 0, 0.117641, 0, 1, 0, -0.117641, 0, 0.993056, 4, 0.886113, -6.17893)
+
+[node name="Level0" parent="." instance=ExtResource("8_77xcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.843931, 0)
 
 [connection signal="visibility_changed" from="tekst" to="tekst" method="_on_visibility_changed"]
