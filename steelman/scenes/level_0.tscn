@@ -1,9 +1,13 @@
-[gd_scene load_steps=25 format=4 uid="uid://cqt8t2u21yh3m"]
+[gd_scene load_steps=29 format=4 uid="uid://cqt8t2u21yh3m"]
 
 [ext_resource type="Texture2D" uid="uid://brwdppxl2o3sv" path="res://assets/Industrial_exterior_v2/Textures/Road.png" id="1_4rchq"]
+[ext_resource type="Script" path="res://scripts/level_0.gd" id="1_vro14"]
 [ext_resource type="Texture2D" uid="uid://sqlg3u4fwcd1" path="res://assets/Industrial_exterior_v2/Textures/Fence.png" id="2_c1mxl"]
 [ext_resource type="Texture2D" uid="uid://bflbnbtw8wwdd" path="res://assets/Industrial_exterior_v2/Textures/Roadblock.png" id="3_it7bq"]
 [ext_resource type="Texture2D" uid="uid://bjooyu8n7ldmi" path="res://assets/Industrial_exterior_v2/Textures/Wall.png" id="4_adldm"]
+[ext_resource type="PackedScene" uid="uid://dtvdfaywvvmpq" path="res://models/vlada/vlada.tscn" id="5_fs1bf"]
+[ext_resource type="PackedScene" uid="uid://c8s0jcnmtkyh8" path="res://models/Helmet.tscn" id="7_ghm25"]
+[ext_resource type="Script" path="res://scripts/tekst.gd" id="7_o3hp2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmspl"]
 resource_name = "Road"
@@ -209,6 +213,7 @@ section_segments = 2
 curve = SubResource("Curve_ieppk")
 
 [node name="Level0" type="Node3D"]
+script = ExtResource("1_vro14")
 
 [node name="Roads" type="Node3D" parent="."]
 
@@ -322,3 +327,18 @@ amount = 100
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_n2w8a")
 draw_pass_1 = SubResource("RibbonTrailMesh_fhpoa")
+
+[node name="vlada" parent="." instance=ExtResource("5_fs1bf")]
+transform = Transform3D(-0.098955, 0, -0.995092, 0, 1, 0, 0.995092, 0, -0.098955, 4.69104, 0.809593, -0.290039)
+
+[node name="Helmet" parent="." instance=ExtResource("7_ghm25")]
+transform = Transform3D(0.993056, 0, 0.117641, 0, 1, 0, -0.117641, 0, 0.993056, 4, 2.01687, -4.80248)
+
+[node name="tekst" type="Label3D" parent="."]
+transform = Transform3D(-0.0235344, 0, -0.946088, 0, 1.29082, 0, 1.30145, 0, -0.0171085, 4.15949, 2.09992, -0.285636)
+visible = false
+billboard = 2
+text = "Oh, hi buddy!"
+script = ExtResource("7_o3hp2")
+
+[connection signal="visibility_changed" from="tekst" to="tekst" method="_on_visibility_changed"]
